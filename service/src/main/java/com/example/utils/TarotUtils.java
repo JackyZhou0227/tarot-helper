@@ -9,7 +9,13 @@ import java.util.List;
 
 public class TarotUtils {
 
-    //0-78随机取三个不同的数
+    /**
+     * 获取随机卡牌集合
+     * 该方法用于从指定数量的卡牌中随机抽取三个不同的卡牌编号，并创建对应的卡牌对象集合
+     *
+     * @param cardNum 卡牌总数，用于指定卡牌池的大小
+     * @return 返回一个包含三个随机且不重复卡牌的列表
+     */
     public static List<Card> getRandomCards(int cardNum) {
         int[] tarotIds = randomCommon(cardNum);
         List<Card> cards = new ArrayList<>();
@@ -46,7 +52,7 @@ public class TarotUtils {
     }
 
     /**
-     * 生成一个包含塔罗牌占卜信息的提示字符串
+     * 生成一个包含塔罗牌占卜信息prompt，用于发给AI
      *
      * @param spread   塔罗牌在牌阵中的位置和含义信息列表
      * @param question 用户提出的问题
@@ -66,13 +72,20 @@ public class TarotUtils {
         return text1 + text2 + text3 + text4 + text5;
     }
 
+    /**
+     * 生成一个无牌阵的塔罗牌占卜信息prompt，用于发给AI
+     *
+     * @param cards    抽到的塔罗牌列表，每张牌包含其正位或逆位的信息
+     * @param question 用户提出的问题
+     * @return 返回一个格式化的字符串，包含占卜的上下文信息、问题、牌阵以及占卜结果的提示
+     */
     public static String createSimplePrompt(List<Card> cards, String question) {
         String text1 = "你是一名塔罗牌占卜师，根据我给你的塔罗牌，给我一个占卜的结果。\n";
         String text2 = "我的问题是：" + question + "\n";
         String text3 = "我我已经抽好了牌，以下是我的牌阵：\n";
         StringBuilder text4 = new StringBuilder();
         for (Card card : cards) {
-            text4.append(card.getTarot().toString()).append(card.isUpright()? "(正位)" : "(逆位)").append("；\n");
+            text4.append(card.getTarot().toString()).append(card.isUpright() ? "(正位)" : "(逆位)").append("；\n");
         }
         String text5 = "请根据我的牌，首先分析每一张牌的关键词和含义，然后根据我的问题，给出一个占卜的结果。";
         return text1 + text2 + text3 + text4 + text5;
