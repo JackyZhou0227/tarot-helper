@@ -4,3 +4,5 @@ spring:
     ai:
         ollama:
             base-url: http://localhost:11434
+            chat:
+                model: qwen2.5:14b

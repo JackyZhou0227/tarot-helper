@@ -9,11 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+
+    /**
+     * 生成prompt并打印
+     */
     public static void main(String[] args) {
         withoutSpread();
     }
 
-    private static void withSpread(){
+    private static void withSpread() {
         List<CardInSpread> spread = new ArrayList<>();
         String question = "我是女生，我想了解一些关于我未来恋人的事情。";
         spread.add(new CardInSpread(1, new Card(Tarot.WANDS_PAGE, false), "Ta是什么类型"));
@@ -26,9 +30,12 @@ public class Main {
         System.out.println(prompt);
     }
 
-    private static void withoutSpread(){
-        List<Card> cards = TarotUtils.getRandomCards(3);
+    private static void withoutSpread() {
         String question = "我是女生，我想了解一些关于我未来恋人的事情。";
+        List<Card> cards = new ArrayList<>();
+        cards.add(new Card(Tarot.THE_HANGED_MAN, true));
+        cards.add(new Card(Tarot.SWORDS_EIGHT, true));
+        cards.add(new Card(Tarot.SWORDS_FOUR, true));
         String prompt = TarotUtils.createSimplePrompt(cards, question);
         System.out.println(prompt);
     }
