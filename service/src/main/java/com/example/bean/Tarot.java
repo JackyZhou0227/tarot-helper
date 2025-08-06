@@ -1,5 +1,8 @@
 package com.example.bean;
 
+import lombok.Getter;
+
+@Getter
 public enum Tarot {
     // 大阿尔卡纳（0-21）
     THE_FOOL(0, "愚人"),
@@ -15,7 +18,7 @@ public enum Tarot {
     THE_WHEEL_OF_FORTUNE(10, "命运之轮"),
     JUSTICE(11, "正义"),
     THE_HANGED_MAN(12, "倒吊人"),
-    DEATH(13, "死亡"),
+    DEATH(13, "死神"),
     THE_TEMPERANCE(14, "节制"),
     THE_DEVIL(15, "恶魔"),
     THE_TOWER(16, "高塔"),
@@ -62,15 +65,12 @@ public enum Tarot {
     PENTACLES_QUEEN(76, "星币王后"), PENTACLES_KING(77, "星币国王");
 
     private final int id;
+
     private final String name;
 
     Tarot(int id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public static Tarot getTarot(int id) {
