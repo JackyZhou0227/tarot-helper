@@ -1,0 +1,21 @@
+# 测试环境配置
+server:
+  port: 8889
+
+app:
+  cors:
+    allowed-origins:
+      - http://localhost:5173
+      - http://test.localhost:5173
+
+logging:
+  level:
+    com.example: INFO
+    org.springframework.web: INFO
+
+spring:
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: qwen2.5:7b

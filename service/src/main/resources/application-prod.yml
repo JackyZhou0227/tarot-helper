@@ -1,0 +1,23 @@
+# 生产环境配置
+server:
+  port: 8080
+
+app:
+  cors:
+    allowed-origins:
+      - https://yourdomain.com
+      - https://www.yourdomain.com
+
+logging:
+  level:
+    com.example: INFO
+    org.springframework.web: WARN
+  file:
+    name: logs/tarot-helper.log
+
+spring:
+  ai:
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      chat:
+        model: ${OLLAMA_MODEL:qwen2.5:14b}

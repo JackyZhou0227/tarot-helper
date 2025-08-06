@@ -20,7 +20,7 @@
 
 ### Ollama
 
-Ollama是一个简化大型语言模型本地部署的工具，支持macOS、Windows、Linux和Docker，有着丰富的模型库，支持Meta llama、Google Gemma、阿里千问大模型等各种主流大模型，可以快速将模型部署到对应系统，不再需要为token付费。
+Ollama是一个简化大型语言模型本地部署的工具，支持macOS、Windows、Linux和Docker，有着丰富的模型库，包括Meta llama、Google Gemma、阿里千问大模型等各种主流大模型，可以快速将模型部署到对应系统，不再需要为token付费。
 
 Spring AI集成了Ollama，可以让Java开发者在Spring Boot项目中也能快速使用Ollama。
 
@@ -37,3 +37,8 @@ spring:
                 model: your_model_name
 ```
 
+## 作者
+
+- **姓名**：Jacky Zhou
+- **邮箱**：jackyzhou0227@foxmail.com
+- **GitHub**：[JackyZhou0227 (Jacky Zhou)](https://github.com/JackyZhou0227)

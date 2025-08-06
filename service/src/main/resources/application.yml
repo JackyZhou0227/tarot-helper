@@ -3,3 +3,7 @@ spring:
         name: tarot-helper
     profiles:
         active: dev
+
+app:
+    cors:
+        allowed-origins: http://localhost:5173
