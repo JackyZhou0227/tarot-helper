@@ -1,0 +1,100 @@
+/* 星空背景组件样式 */
+.mystical-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 不同大小的星星 */
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+}
+
+.star-small {
+  width: 1px;
+  height: 1px;
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.6);
+}
+
+.star-medium {
+  width: 2px;
+  height: 2px;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+}
+
+.star-large {
+  width: 3px;
+  height: 3px;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.9), 0 0 20px rgba(255, 215, 0, 0.4);
+  background: #ffd700;
+}
+
+/* 流星效果 */
+.meteors {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.meteor {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: linear-gradient(45deg, #fff, #ffd700);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), -20px -10px 10px rgba(255, 255, 255, 0.3);
+}
+
+.meteor::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -20px;
+  width: 20px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8));
+}
+
+/* 神秘符号 */
+.mystic-symbols {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mystic-symbol {
+  position: absolute;
+  font-size: 16px;
+  color: rgba(255, 215, 0, 0.6);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+  font-weight: bold;
+}
+
+/* 神秘月亮 */
+.mystical-moon {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  color: rgba(255, 255, 255, 0.6);
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));
+}

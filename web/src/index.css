@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Crimson Text', serif;
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 25%, #2d1b69 50%, #1a1a3a 75%, #0f0f23 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  color: #e6d7c3;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.streaming-cursor {
+  color: #ffd700;
+  animation: blink 1s infinite;
+  font-weight: bold;
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(120, 119, 198, 0.5); }
+  50% { box-shadow: 0 0 40px rgba(120, 119, 198, 0.8), 0 0 60px rgba(255, 255, 255, 0.3); }
+}
+
+.mystical-title {
+  font-family: 'Cinzel', serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #ffd700, #ffb347, #dda0dd, #87ceeb);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 8s ease infinite;
+  text-align: center;
+  margin: 2rem 0;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+.card {
+  background: rgba(15, 15, 35, 0.8);
+  border: 2px solid rgba(120, 119, 198, 0.3);
+  border-radius: 15px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ffd700, #ffb347, #dda0dd, #87ceeb);
+  border-radius: 15px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover::before {
+  opacity: 0.7;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(120, 119, 198, 0.4);
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #6366f1, #8b5cf6, #a855f7);
+  border: none;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+}
+
+.input-mystical {
+  background: rgba(15, 15, 35, 0.6);
+  border: 2px solid rgba(120, 119, 198, 0.3);
+  border-radius: 10px;
+  padding: 1rem;
+  color: #e6d7c3;
+  font-family: 'Crimson Text', serif;
+  font-size: 1.1rem;
+  width: 100%;
+  min-height: 200px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.input-mystical:focus {
+  outline: none;
+  border-color: rgba(120, 119, 198, 0.8);
+  box-shadow: 0 0 20px rgba(120, 119, 198, 0.3);
+}
+
+.input-mystical::placeholder {
+  color: rgba(230, 215, 195, 0.6);
+}
+
+/* 塔罗牌相关样式已迁移到TarotCard.css */
+/* 占卜结果相关样式已迁移到DivinationResult.css */
+
+/* StarField背景样式已迁移到StarField.css */
+
+@media (max-width: 768px) {
+  .mystical-title {
+    font-size: 2.5rem;
+  }
+  
+  .card {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .tarot-card {
+    width: 100px;
+    height: 160px;
+  }
+}
