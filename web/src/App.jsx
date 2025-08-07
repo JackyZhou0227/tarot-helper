@@ -49,7 +49,7 @@ function App() {
       // 将后端返回的卡牌转换为前端显示格式
       const selectedCards = backendCards.map(card => ({
         tarot: card.tarot,
-        upright: card.upright
+        upright: card.isUpright
       }));
       
       setDrawnCards(selectedCards);

@@ -3,104 +3,87 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0.5rem;
+  margin: 10px;
+  cursor: pointer;
 }
 
-/* 塔罗牌卡片 */
+/* 塔罗牌主体 */
 .tarot-card {
   width: 120px;
   height: 200px;
-  background: linear-gradient(145deg, #1a1a3a, #2d1b69);
-  border: 3px solid #ffd700;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   overflow: hidden;
-  perspective: 1000px;
-  animation: float 6s ease-in-out infinite;
-}
-
-.tarot-card:hover {
-  transform: translateY(-10px) scale(1.05);
-  box-shadow: 0 15px 30px rgba(255, 215, 0, 0.3);
-  animation: glow 2s ease-in-out infinite;
-}
-
-.tarot-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 179, 71, 0.1));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.tarot-card:hover::before {
-  opacity: 1;
-}
-
-.card-inner {
   position: relative;
-  width: 100%;
-  height: 100%;
+  transition: all 0.3s ease;
+  perspective: 1000px;
   transform-style: preserve-3d;
 }
 
+.tarot-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+/* 卡牌图片容器 */
+.card-image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 塔罗牌图片 */
+.tarot-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+/* 逆位时旋转180度 */
+.tarot-card-image.reversed {
+  transform: rotate(180deg);
+}
+
+/* 备用符号样式 */
+.tarot-symbol-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+/* 卡牌面样式 */
 .card-face {
   position: absolute;
   width: 100%;
   height: 100%;
+  border-radius: 12px;
   backface-visibility: hidden;
-  border-radius: 10px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  border: 2px solid #ffd700;
 }
 
-.card-front {
-  background: linear-gradient(145deg, #f8f9fa, #e9ecef);
-  transform: rotateY(180deg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-}
-
+/* 卡背样式 */
 .card-back {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(145deg, #2d1b69, #1a1a3a);
-  border-radius: 7px;
-}
-
-.card-back-content {
-  position: relative;
-  width: 100%;
-  height: 100%;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: rotateY(180deg);
 }
 
-.card-back-title {
-  margin-top: 0.5rem;
-  font-size: 0.8rem;
-  font-weight: 500;
+/* 卡牌正面样式 */
+.card-front {
+  transform: rotateY(0deg);
 }
 
+/* 神秘图案 */
 .mystical-pattern {
   display: flex;
   align-items: center;
@@ -108,233 +91,96 @@
 }
 
 .pattern-circle {
-  width: 60px;
-  height: 60px;
-  border: 2px solid #ffd700;
+  width: 80px;
+  height: 80px;
+  border: 2px solid #f39c12;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.1), transparent);
+  position: relative;
 }
 
 .inner-circle {
-  width: 40px;
-  height: 40px;
-  border: 1px solid #ffd700;
+  width: 60px;
+  height: 60px;
+  border: 1px solid #f39c12;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.8;
 }
 
 .center-star {
-  color: #ffd700;
-  font-size: 20px;
-  text-shadow: 0 0 10px #ffd700;
+  font-size: 1.5rem;
+  color: #f39c12;
+  animation: rotate 4s linear infinite;
 }
 
-.card-border {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  right: 8px;
-  bottom: 8px;
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  border-radius: 5px;
-  pointer-events: none;
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-/* 翻转动画 */
-.tarot-card.flipping {
-  transform: rotateY(180deg);
-  transition: transform 0.6s;
-}
-
-.tarot-card.flipped .card-front {
-  transform: rotateY(180deg);
-}
-
-.tarot-card.flipped .card-back {
-  transform: rotateY(0deg);
-}
-
-.card-content {
-  padding: 15px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+/* 卡牌信息区域 */
+.tarot-card-info {
+  margin-top: 12px;
   text-align: center;
+  max-width: 120px;
 }
 
-.card-content .card-symbol {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.card-content .card-name {
-  font-size: 0.9rem;
-  font-weight: bold;
-  font-family: 'Cinzel', serif;
-}
-
-.card-content .card-meaning {
-  font-size: 0.7rem;
-  margin-top: 0.5rem;
-  opacity: 0.8;
-}
-
-.card-header {
-  margin-bottom: 10px;
-}
-
-.card-title {
-  font-size: 14px;
-  font-weight: bold;
-  color: #2d1b69;
-  margin: 0;
-  font-family: 'Cinzel', serif;
-}
-
-.card-image {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tarot-symbol {
-  font-size: 40px;
-  opacity: 0.8;
-}
-
-.card-footer {
-  margin-top: 10px;
-}
-
-.position-indicator {
-  font-size: 12px;
-  font-weight: bold;
-  padding: 4px 8px;
-  border-radius: 12px;
-  color: white;
-}
-
-.position-indicator.upright {
-  background: linear-gradient(45deg, #28a745, #20c997);
-}
-
-.position-indicator.reversed {
-  background: linear-gradient(45deg, #dc3545, #fd7e14);
-}
-
-/* 塔罗牌名称 */
-.tarot-card-name {
-  font-family: 'Cinzel', serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #ffd700;
-  text-align: center;
-  margin-top: 0.5rem;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-  white-space: nowrap;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tarot-card-name-container {
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 0.5rem;
-}
-
-.tarot-card-name-below {
-  font-family: 'Cinzel', serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #ffd700;
-  text-align: center;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-  white-space: nowrap;
-}
-
+/* 卡牌名称 */
 .card-name {
   font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 5px;
-  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  color: #ffd700;
+  margin-bottom: 4px;
+  line-height: 1.2;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
 }
 
+/* 正逆位标识 */
 .card-position {
-  font-size: 14px;
-  opacity: 0.8;
-}
-
-/* 动画效果 */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes glow {
-  0%, 100% {
-    box-shadow: 0 15px 30px rgba(255, 215, 0, 0.3);
-  }
-  50% {
-    box-shadow: 0 15px 30px rgba(255, 215, 0, 0.6);
-  }
+  font-size: 12px;
+  color: #ffd700;
+  font-weight: 500;
+  text-shadow: 0 0 6px rgba(255, 215, 0, 0.4);
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
   .tarot-card {
     width: 100px;
-    height: 160px;
+    height: 166px;
   }
   
-  .tarot-card-name {
-    font-size: 0.8rem;
+  .tarot-card-info {
+    max-width: 100px;
   }
   
-  .tarot-card-name-below {
-    font-size: 0.8rem;
+  .card-name {
+    font-size: 14px;
   }
   
-  .card-content .card-symbol {
-    font-size: 2rem;
+  .card-position {
+    font-size: 10px;
   }
   
-  .card-content .card-name {
-    font-size: 0.8rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .tarot-card {
-    width: 80px;
-    height: 130px;
-    margin: 0.25rem;
+  .pattern-circle {
+    width: 60px;
+    height: 60px;
   }
   
-  .tarot-card-name {
-    font-size: 0.7rem;
+  .inner-circle {
+    width: 45px;
+    height: 45px;
   }
   
-  .tarot-card-name-below {
-    font-size: 0.7rem;
-  }
-  
-  .card-content .card-symbol {
-    font-size: 1.5rem;
+  .center-star {
+    font-size: 1.2rem;
   }
 }
