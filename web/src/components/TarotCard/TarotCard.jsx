@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { tarotNameMap } from '../../constants/tarotCards';
+import { getCardImagePath, DEFAULT_SKIN } from '../../constants/tarotSkins';
 import './TarotCard.css';
 
 // 塔罗牌名称组件
@@ -20,44 +21,48 @@ const TarotCardName = ({ card, isRevealed, position }) => {
     }
   }, [isRevealed]);
   
-  if (!showName) return null;
-  
   const cardName = tarotNameMap[card.tarot] || card.tarot;
   const positionText = card.upright ? '正位' : '逆位';
   
   return (
-    <motion.div
-      className="tarot-card-name"
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="card-name">{cardName}</div>
-      <div className="card-position">{positionText}</div>
-    </motion.div>
+    <div className="tarot-card-name-container">
+      {showName && (
+        <motion.div
+          className="tarot-card-info-below"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="card-name-below">{cardName}</div>
+          <div className="card-position-below">{positionText}</div>
+        </motion.div>
+      )}
+    </div>
   );
 };
 
 // 塔罗牌组件
 const TarotCard = ({ card, isRevealed, onClick, position }) => {
   return (
-    <motion.div
-      className="tarot-card"
-      onClick={onClick}
-      whileHover={{ scale: 1.05, y: -10 }}
-      whileTap={{ scale: 0.95 }}
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: position * 0.2 }}
-    >
+    <div className="tarot-card-container">
       <motion.div
-        className="card-inner"
-        animate={{ rotateY: isRevealed ? 180 : 0 }}
-        transition={{ duration: 0.6, ease: "easeInOut" }}
+        className="tarot-card-simple"
+        onClick={onClick}
+        whileTap={{ scale: 0.95 }}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: position * 0.2 }}
+        style={{
+          animationDelay: `${position * -1.5}s` // 为不同位置的卡牌设置不同的浮动动画延迟
+        }}
       >
-        {/* 卡牌背面 */}
-        <div className="card-face card-back">
-          <div className="card-back-content">
+        <motion.div
+          className="card-flip-container"
+          animate={{ rotateY: isRevealed ? 180 : 0 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+        >
+          {/* 卡牌背面 */}
+          <div className="card-side card-back-simple">
             <div className="mystical-pattern">
               <div className="pattern-circle">
                 <div className="inner-circle">
@@ -65,35 +70,30 @@ const TarotCard = ({ card, isRevealed, onClick, position }) => {
                 </div>
               </div>
             </div>
-            <div className="card-border"></div>
           </div>
-        </div>
-        
-        {/* 卡牌正面 */}
-        <div className="card-face card-front">
-          <div className="card-content">
-            <div className="card-header">
-              <h3 className="card-title">
-                {tarotNameMap[card.tarot] || card.tarot}
-              </h3>
-            </div>
-            <div className="card-image">
-              <div className="tarot-symbol">
-                {card.upright ? '🔮' : '🌙'}
-              </div>
-            </div>
-            <div className="card-footer">
-              <span className={`position-indicator ${card.upright ? 'upright' : 'reversed'}`}>
-                {card.upright ? '正位' : '逆位'}
-              </span>
+          
+          {/* 卡牌正面 - 直接显示图片 */}
+          <div className="card-side card-front-simple">
+            <img 
+              src={getCardImagePath(card.tarot, DEFAULT_SKIN)}
+              alt={tarotNameMap[card.tarot] || card.tarot}
+              className={`tarot-card-image ${!card.upright ? 'reversed' : ''}`}
+              onError={(e) => {
+                // 如果图片加载失败，显示备用符号
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'flex';
+              }}
+            />
+            <div className="tarot-symbol-fallback" style={{display: 'none'}}>
+              {card.upright ? '🔮' : '🌙'}
             </div>
           </div>
-        </div>
+        </motion.div>
       </motion.div>
       
       {/* 卡牌名称 */}
       <TarotCardName card={card} isRevealed={isRevealed} position={position} />
-    </motion.div>
+    </div>
   );
 };
 

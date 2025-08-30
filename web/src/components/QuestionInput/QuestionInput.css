@@ -64,6 +64,11 @@
   font-weight: 500;
 }
 
+.textarea-container {
+  position: relative;
+  width: 100%;
+}
+
 .question-textarea {
   width: 100%;
   min-height: 120px;
@@ -79,6 +84,31 @@
   transition: all 0.3s ease;
   font-family: inherit;
   box-sizing: border-box;
+}
+
+.typing-placeholder {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  color: rgba(230, 215, 195, 0.6);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-family: inherit;
+  font-style: italic;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.typing-cursor {
+  color: #ffd700;
+  font-weight: bold;
+  animation: blink 1s infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }
 
 .question-textarea::placeholder {
