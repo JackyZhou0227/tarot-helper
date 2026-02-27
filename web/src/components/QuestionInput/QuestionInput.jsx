@@ -10,17 +10,17 @@ const QuestionInput = ({ question, setQuestion, onDrawCards, isLoading }) => {
     "我的事业前景怎样？",
     "我今天的运势怎么样？"
   ];
-  
+
   const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
-  
+
   useEffect(() => {
     const currentQuestion = placeholderQuestions[currentPlaceholderIndex];
     let charIndex = 0;
     setDisplayedText('');
     setIsTyping(true);
-    
+
     const typeInterval = setInterval(() => {
       if (charIndex < currentQuestion.length) {
         setDisplayedText(currentQuestion.slice(0, charIndex + 1));
@@ -28,16 +28,16 @@ const QuestionInput = ({ question, setQuestion, onDrawCards, isLoading }) => {
       } else {
         clearInterval(typeInterval);
         setIsTyping(false);
-        
+
         // 显示完成后等待3.5秒再切换到下一个问题
         setTimeout(() => {
-          setCurrentPlaceholderIndex((prevIndex) => 
+          setCurrentPlaceholderIndex((prevIndex) =>
             (prevIndex + 1) % placeholderQuestions.length
           );
         }, 3500);
       }
     }, 80); // 每个字符间隔80ms，适中的打字速度
-    
+
     return () => clearInterval(typeInterval);
   }, [currentPlaceholderIndex]); // 移除placeholderQuestions依赖，避免无限循环
 
@@ -62,22 +62,22 @@ const QuestionInput = ({ question, setQuestion, onDrawCards, isLoading }) => {
           请输入您想要占卜的问题：
         </label>
         <div className="textarea-container">
-           <textarea
-             className="question-textarea"
-             rows="4"
-             placeholder=" " // 空占位符，使用自定义显示
-             value={question}
-             onChange={(e) => setQuestion(e.target.value)}
-             onKeyDown={handleKeyDown}
-           />
-           {!question && (
-             <div className="typing-placeholder">
-               {displayedText}
-             </div>
-           )}
-         </div>
+          <textarea
+            className="question-textarea"
+            rows="4"
+            placeholder=" " // 空占位符，使用自定义显示
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+          {!question && (
+            <div className="typing-placeholder">
+              {displayedText}
+            </div>
+          )}
+        </div>
       </div>
-      
+
       <div className="action-container">
         <motion.button
           className="divination-button"
